@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Explicit List View for Progress Steps -->
+    <record id="view_sale_order_progress_step_list" model="ir.ui.view">
+        <field name="name">sale.order.progress.step.list</field>
+        <field name="model">sale.order.progress.step</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="percentage"/>
+                <field name="is_billed" readonly="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Inherit Sale Order Form -->
+    <record id="view_order_form_construction_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.construction.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="billing_type" widget="radio" options="{'horizontal': true}"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Construction Billing" name="construction_billing" invisible="billing_type != 'progress'">
+                    <group>
+                        <group>
+                            <field name="guarantee_retention_rate"/>
+                            <field name="prorata_rate"/>
+                        </group>
+                    </group>
+                    <!-- Reference the explicit list view to avoid parsing ambiguity -->
+                    <field name="progress_billing_step_ids" context="{'tree_view_ref': 'sale_construction_billing.view_sale_order_progress_step_list'}"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

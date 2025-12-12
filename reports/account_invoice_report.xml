@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- No major changes needed if lines are explicit, but ensuring negative amounts display clearly -->
+    <template id="report_invoice_document_construction" inherit_id="account.report_invoice_document">
+        <!-- Add standard check or specific styling if needed. 
+             For now, relying on standard line display is safer as we added explicit lines for retention. -->
+         <xpath expr="//div[@id='total']" position="before">
+            <!-- Example: Add a note if it's a progress billing invoice? 
+                 We don't easily know strictly from invoice unless we flag it. 
+                 But the lines speak for themselves. -->
+        </xpath>
+    </template>
+</odoo>

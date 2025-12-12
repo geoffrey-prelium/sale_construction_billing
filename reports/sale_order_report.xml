@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document_construction" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@id='total']" position="after">
+            <div t-if="doc.billing_type == 'progress'" class="row mt-4 mb-4" id="construction_billing_info">
+                <div class="col-6">
+                    <strong>Billing Conditions:</strong>
+                    <table class="table table-sm table-borderless">
+                        <tr t-if="doc.guarantee_retention_rate > 0">
+                            <td>Guarantee Retention:</td>
+                            <td class="text-end"><span t-field="doc.guarantee_retention_rate"/>%</td>
+                        </tr>
+                        <tr t-if="doc.prorata_rate > 0">
+                            <td>Prorata Account:</td>
+                            <td class="text-end"><span t-field="doc.prorata_rate"/>%</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-6">
+                    <strong>Planned Steps:</strong>
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Step</th>
+                                <th class="text-end">%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="doc.progress_billing_step_ids" t-as="step">
+                                <td><span t-field="step.name"/></td>
+                                <td class="text-end"><span t-field="step.percentage"/>%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
