@@ -17,6 +17,7 @@
         'reports/sale_order_report.xml',
         'reports/account_invoice_report.xml',
     ],
+    'demo': [],
     'installable': True,
     'application': False,
     'license': 'LGPL-3',
