@@ -1,6 +1,7 @@
 {
     'name': 'Construction Progress Billing',
     'version': '1.0',
+    'author': 'Prelium',
     'category': 'Sales',
     'summary': 'Progress billing, Guarantee Retention, and Prorata for Construction',
     'description': """
